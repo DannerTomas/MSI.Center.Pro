@@ -1,0 +1,24 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        App-specific brushes only. Everything else comes from MaterialDesignThemes
+        (BundledTheme + MaterialDesign2.Defaults).
+        App.RingTrack / App.RingValue are replaced at runtime by ThemeManager
+        (they feed the custom RingProgress gauge template in Themes/Generic.xaml).
+    -->
+
+    <SolidColorBrush x:Key="App.RingTrack" Color="#E1E5EF" />
+    <LinearGradientBrush x:Key="App.RingValue" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#F05E6B" Offset="0" />
+        <GradientStop Color="#E4002B" Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="App.Success" Color="#2FA46B" />
+    <SolidColorBrush x:Key="App.Warning" Color="#E8A23D" />
+    <SolidColorBrush x:Key="App.AccentText" Color="#E4002B" />
+    <SolidColorBrush x:Key="App.CaptionHover" Color="#E7E7E7" />
+    <SolidColorBrush x:Key="App.CaptionPressed" Color="#D8D8D8" />
+    <SolidColorBrush x:Key="App.Ripple" Color="#30000000" />
+
+</ResourceDictionary>

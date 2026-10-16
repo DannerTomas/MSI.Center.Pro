@@ -1,0 +1,301 @@
+﻿<UserControl x:Class="MSICenterPro.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="820" d:DesignWidth="1160">
+
+    <Grid Margin="32,14,32,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- header -->
+        <StackPanel Tag="enter" Margin="0,8,0,0">
+            <TextBlock Text="基础设置" Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+            <TextBlock Text="系统、显示、电源与设备偏好设置"
+                       Style="{StaticResource MaterialDesignCaptionTextBlock}" Margin="1,7,0,0" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Margin="0,18,0,0" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="0,0,10,10">
+
+                <!-- ===== system & keys ===== -->
+                <materialDesign:Card UniformCornerRadius="8" Tag="enter" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="系统与按键" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="20,16,20,4" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="MicrosoftWindows" Width="20" Height="20"
+                                                     Margin="0,0,14,0" VerticalAlignment="Center"
+                                                     Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Win 键开关" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="关闭可避免游戏时误触"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.WinKey, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Border Height="1" Margin="54,0,20,0" Opacity="0.2"
+                                Background="{DynamicResource MaterialDesign.Brush.Secondary}" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="SwapHorizontal" Width="20" Height="20"
+                                                     Margin="0,0,14,0" VerticalAlignment="Center"
+                                                     Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Win/Fn 按键对调"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="交换左下角 Win 与 Fn 键功能"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.WinFnSwap, Mode=TwoWay}" />
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- ===== display ===== -->
+                <materialDesign:Card UniformCornerRadius="8" Tag="enter" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="显示与屏幕" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="20,16,20,4" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Monitor" Width="20" Height="20" Margin="0,0,14,0"
+                                                     VerticalAlignment="Center" Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="提高显示器响应速度 (OD)"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="减少画面拖影，加快灰阶响应"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.OverDrive, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Border Height="1" Margin="54,0,20,0" Opacity="0.2"
+                                Background="{DynamicResource MaterialDesign.Brush.Secondary}" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="CrosshairsGps" Width="20" Height="20"
+                                                     Margin="0,0,14,0" VerticalAlignment="Center"
+                                                     Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="屏幕准星" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="屏幕中央显示辅助瞄准点"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.Crosshair, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Border Height="1" Margin="54,0,20,0" Opacity="0.2"
+                                Background="{DynamicResource MaterialDesign.Brush.Secondary}" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Hdr" Width="20" Height="20" Margin="0,0,14,0"
+                                                     VerticalAlignment="Center" Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="HDR" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="高动态范围显示，需屏幕支持"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.Hdr, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Border Height="1" Margin="54,0,20,0" Opacity="0.2"
+                                Background="{DynamicResource MaterialDesign.Brush.Secondary}" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Brightness6" Width="20" Height="20"
+                                                     Margin="0,0,14,0" VerticalAlignment="Center"
+                                                     Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="屏幕省电模式"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="降低屏幕亮度以节省电量"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.PowerSaving, Mode=TwoWay}" />
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- ===== power & devices ===== -->
+                <materialDesign:Card UniformCornerRadius="8" Tag="enter" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="电源与设备" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="20,16,20,4" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="UsbPort" Width="20" Height="20" Margin="0,0,14,0"
+                                                     VerticalAlignment="Center" Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="USB 电源共享"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="关机后仍为 USB 设备供电"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding Settings.UsbPowerShare, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Border Height="1" Margin="54,0,20,0" Opacity="0.2"
+                                Background="{DynamicResource MaterialDesign.Brush.Secondary}" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Sleep" Width="20" Height="20" Margin="0,0,14,0"
+                                                     VerticalAlignment="Center" Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="休眠/睡眠切换"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="电源键触发的方式"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ComboBox Grid.Column="2" Width="150" VerticalAlignment="Center"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                      SelectedIndex="{Binding Settings.SleepModeIndex, Mode=TwoWay}">
+                                <ComboBoxItem Content="睡眠" />
+                                <ComboBoxItem Content="休眠" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Border Height="1" Margin="54,0,20,0" Opacity="0.2"
+                                Background="{DynamicResource MaterialDesign.Brush.Secondary}" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Laptop" Width="20" Height="20" Margin="0,0,14,0"
+                                                     VerticalAlignment="Center" Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="合盖行为" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="笔记本合上屏幕时执行的操作"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ComboBox Grid.Column="2" Width="210" VerticalAlignment="Center"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                      SelectedIndex="{Binding Settings.LidActionIndex, Mode=TwoWay}">
+                                <ComboBoxItem Content="预设" />
+                                <ComboBoxItem Content="睡眠" />
+                                <ComboBoxItem Content="休眠" />
+                                <ComboBoxItem Content="关机" />
+                                <ComboBoxItem Content="不采取任何操作" />
+                            </ComboBox>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- ===== appearance ===== -->
+                <materialDesign:Card UniformCornerRadius="8" Tag="enter" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="外观" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                   Margin="20,16,20,4" />
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="WeatherNight" Width="20" Height="20"
+                                                     Margin="0,0,14,0" VerticalAlignment="Center"
+                                                     Opacity="0.7" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="深色模式"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                                <TextBlock Text="在浅色与深色外观之间切换"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <ToggleButton Grid.Column="2" VerticalAlignment="Center"
+                                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          IsChecked="{Binding IsDarkMode, Mode=TwoWay}" />
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+
+                <!-- ===== reset ===== -->
+                <Button Style="{StaticResource MaterialDesignOutlinedButton}" Tag="enter"
+                        HorizontalAlignment="Left" Margin="2,4,0,10" Padding="18,10"
+                        Command="{Binding ResetCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Restart" Width="16" Height="16"
+                                                 VerticalAlignment="Center" />
+                        <TextBlock Text="恢复默认设置" Margin="9,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

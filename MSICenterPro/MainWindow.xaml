@@ -1,0 +1,204 @@
+﻿<Window x:Class="MSICenterPro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:views="clr-namespace:MSICenterPro.Views"
+        mc:Ignorable="d"
+        Title="MSI Center Pro"
+        Width="1240" Height="830"
+        MinWidth="1000" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        Icon="/Assets/ICON.ico"
+        Background="{DynamicResource MaterialDesign.Brush.Background}"
+        FontFamily="Segoe UI Variable Text, Segoe UI, Microsoft YaHei UI"
+        TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display">
+
+    <shell:WindowChrome.WindowChrome>
+        <!-- SingleBorderWindow + WindowChrome keeps the native window style bits
+             (system shadow, minimize/maximize animations, taskbar work-area
+             constraints) while the non-client area is replaced by our chrome. -->
+        <shell:WindowChrome CaptionHeight="48" ResizeBorderThickness="6" GlassFrameThickness="0,0,0,1"
+                            CornerRadius="0" UseAeroCaptionButtons="False" />
+    </shell:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <!-- Windows 10 style caption buttons -->
+        <Style x:Key="CaptionButton" TargetType="Button">
+            <Setter Property="Width" Value="46" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Foreground" Value="{DynamicResource MaterialDesign.Brush.Foreground}" />
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background"
+                                        Value="{DynamicResource App.CaptionHover}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background"
+                                        Value="{DynamicResource App.CaptionPressed}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CaptionButtonClose" TargetType="Button" BasedOn="{StaticResource CaptionButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#E81123" />
+                                <Setter Property="Foreground" Value="#FFFFFF" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#F1707A" />
+                                <Setter Property="Foreground" Value="#FFFFFF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5,0.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="248" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- ==================== Navigation rail ==================== -->
+        <Grid Grid.Column="0" Background="{DynamicResource MaterialDesign.Brush.Card.Background}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="20,20,16,18">
+                <Border Width="42" Height="42" CornerRadius="11">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Direction="270" Opacity="0.35"
+                                          Color="#000000" RenderingBias="Performance" />
+                    </Border.Effect>
+                    <Image Source="/Assets/MSI-Center-Pro-ICON.png" Stretch="UniformToFill"
+                           RenderOptions.BitmapScalingMode="HighQuality" />
+                </Border>
+                <StackPanel Margin="11,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="MSI Center" FontSize="15" FontWeight="SemiBold" />
+                    <TextBlock Text="Pro · 2.0.74" FontSize="11" Opacity="0.6" Margin="0,2,0,0" />
+                </StackPanel>
+            </StackPanel>
+
+            <ListBox x:Name="NavList" Grid.Row="1" Margin="8,0" Background="Transparent"
+                     BorderThickness="0" SelectionChanged="Nav_SelectionChanged"
+                     PreviewMouseLeftButtonUp="NavList_PreviewMouseLeftButtonUp">
+                <ListBoxItem Height="46" Padding="6,0" AutomationProperties.Name="看板"
+                             FocusVisualStyle="{x:Null}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ViewDashboard" Width="20" Height="20"
+                                                 VerticalAlignment="Center" />
+                        <TextBlock Text="看板" FontSize="13" Margin="14,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Height="46" Padding="6,0" AutomationProperties.Name="性能"
+                             FocusVisualStyle="{x:Null}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Gauge" Width="20" Height="20"
+                                                 VerticalAlignment="Center" />
+                        <TextBlock Text="性能" FontSize="13" Margin="14,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Height="46" Padding="6,0" AutomationProperties.Name="设置"
+                             FocusVisualStyle="{x:Null}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cog" Width="20" Height="20"
+                                                 VerticalAlignment="Center" />
+                        <TextBlock Text="设置" FontSize="13" Margin="14,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+
+            <!-- live status card -->
+            <materialDesign:Card Grid.Row="3" UniformCornerRadius="7" Padding="16,13" Margin="14,0,14,14">
+                <StackPanel>
+                    <TextBlock Text="当前模式" FontSize="11" Opacity="0.55" />
+                    <TextBlock Text="{Binding Performance.Selected.Title}" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{DynamicResource App.AccentText}" Margin="0,3,0,10" />
+                    <TextBlock FontSize="12" Opacity="0.75">
+                        <Run Text="CPU " />
+                        <Run Text="{Binding Dashboard.Monitor.CpuTemperature, Mode=OneWay}" />
+                        <Run Text=" · GPU " />
+                        <Run Text="{Binding Dashboard.Monitor.GpuTemperature, Mode=OneWay}" />
+                    </TextBlock>
+                    <TextBlock FontSize="12" Opacity="0.75" Margin="0,4,0,0">
+                        <Run Text="风扇 " />
+                        <Run Text="{Binding Dashboard.Monitor.CpuFanSpeed, Mode=OneWay}" />
+                        <Run Text=" / " />
+                        <Run Text="{Binding Dashboard.Monitor.GpuFanSpeed, Mode=OneWay}" />
+                    </TextBlock>
+                </StackPanel>
+            </materialDesign:Card>
+        </Grid>
+
+        <!-- ==================== Content area ==================== -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- caption buttons (Windows 10 style) -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right"
+                        VerticalAlignment="Top">
+                <Button Style="{StaticResource CaptionButton}" Click="Minimize_Click" ToolTip="最小化"
+                        AutomationProperties.Name="最小化">
+                    <TextBlock Text="&#xE921;" FontFamily="Segoe MDL2 Assets" FontSize="10" />
+                </Button>
+                <Button Style="{StaticResource CaptionButton}" Click="MaxRestore_Click" ToolTip="最大化/还原"
+                        AutomationProperties.Name="最大化">
+                    <TextBlock x:Name="MaxGlyph" Text="&#xE922;" FontFamily="Segoe MDL2 Assets" FontSize="10" />
+                </Button>
+                <Button Style="{StaticResource CaptionButtonClose}" Click="Close_Click" ToolTip="关闭"
+                        AutomationProperties.Name="关闭">
+                    <TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets" FontSize="10" />
+                </Button>
+            </StackPanel>
+
+            <!-- page host -->
+            <Grid x:Name="PageHost" Grid.Row="1">
+                <views:DashboardView x:Name="PageDashboard" DataContext="{Binding Dashboard}" />
+                <views:PerformanceView x:Name="PagePerformance" DataContext="{Binding Performance}"
+                                       Visibility="Collapsed" />
+                <views:SettingsView x:Name="PageSettings" DataContext="{Binding Settings}"
+                                    Visibility="Collapsed" />
+            </Grid>
+        </Grid>
+
+        <!-- ==================== Snackbar ==================== -->
+        <materialDesign:Snackbar x:Name="Snackbar" Grid.ColumnSpan="2" Panel.ZIndex="99"
+                                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                 Margin="0,0,0,26" />
+    </Grid>
+</Window>

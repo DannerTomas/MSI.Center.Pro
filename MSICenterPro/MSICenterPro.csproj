@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>MSICenterPro</RootNamespace>
+    <AssemblyName>MSICenterPro</AssemblyName>
+    <Version>2.0.74</Version>
+    <Product>MSI Center Pro</Product>
+    <AssemblyTitle>MSI Center Pro</AssemblyTitle>
+    <SatelliteResourceLanguages>zh-Hans;en</SatelliteResourceLanguages>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\ICON.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\ICON.ico" />
+    <Resource Include="Assets\MSI-Center-Pro-ICON.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    <PackageReference Include="System.Management" Version="10.0.13" />
+  </ItemGroup>
+
+</Project>
